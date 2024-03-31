@@ -68,7 +68,7 @@ export const getStringId = (item: unknown): string => {
   return "";
 };
 
-export const createSelectedItem = (item: unknown, index: number): IItem => {
+export const createItem = (item: unknown, index: number): IItem => {
   return { id: (item as Record<string, unknown>).id as string, index };
 };
 

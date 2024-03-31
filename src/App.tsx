@@ -55,7 +55,7 @@ function App() {
           renderItem: renderDescriptionItem,
           title: "Descriptions",
         }}
-        onConnectionsChange={(connections) => console.log(connections)}
+        onConnectionsChange={(connections) => console.log('connections', connections)}
         connections={[{ color: getRandomColor(), start: 1, end: "2" }]}
       />
     </div>
