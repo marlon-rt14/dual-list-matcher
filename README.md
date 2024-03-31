@@ -1,5 +1,7 @@
 # DUAL LIST MATCHER 💣
 
+🚨🚨 En esta rama se ha cambiado **React** por **Preact**. La forma en que se usa el componente `MatchColumns` no ha sufrido cambios. Simplemente se ha echo un refactor del algoritmo que se encarga de hacer la conexión entre 2 elementos. La razón de este cambio es para mejorar el rendimiento, lógica y mantenimiento. Al usar esta misma lógica con estados de react puedes encontrar algunos incovenientes en el renderizado. Esto es debido la que los estados son asíncronos. PUEDES USAR ESTE COMPONENTE EN TUS PROYECTOS DE REACT **SIN PROBLEMAS**. Sólo asegúrate de instalar la [compatibilidad de preact con react](https://preactjs.com/guide/v10/differences-to-react/#version-compatibility). 🚨🚨
+
 Demo
 
 ![dual-list-matcher](https://firebasestorage.googleapis.com/v0/b/storage-images-5578f.appspot.com/o/GLOBAL%2Fdual-list-matcher%2FScreenshot%202024-03-31%20010600.png?alt=media&token=d0e657d5-0e76-4737-afd0-d5e8aa08492d)
@@ -9,33 +11,36 @@ Demo
 En este proyecto se muestra cómo se puede conectar 2 elementos mediante una línea. Ésta línea puede ser guionada o una flecha. Del mismo modo la conexión podrá ser unidireccional o bidireccional.
 
 # Ventajas 📈
+
 Los componentes mostrados a continuación son exclusivos para trabajar siempre con 2 listas sin importar su tamaño, en las cuales se realizará un match o conexión. No obstante, los items pueden ser de cualquier tipo permitiendo asi renderizar cualquier elemento, ya sea que se trate de estructuras simples como un texto o complejas con imagenes, texto o multimedia.
 
-Además al estar construido con Typescript. A nivel de programación,  estos datos son genéricos lo que resulta fácil conocer sus tipos de datos según la lista que enviemos. De esta forma podemos reusar tantas veces como deseemos nuestro componente con muchos datos diferentes y sin afectar su funcionamiento. Además de que nos ayuda el autocompletado. 
+Además al estar construido con Typescript. A nivel de programación, estos datos son genéricos lo que resulta fácil conocer sus tipos de datos según la lista que enviemos. De esta forma podemos reusar tantas veces como deseemos nuestro componente con muchos datos diferentes y sin afectar su funcionamiento. Además de que nos ayuda el autocompletado.
 
-# Funcionamiento  🚀
+# Funcionamiento 🚀
 
-La librería [react-xarrows](https://www.npmjs.com/package/react-xarrows) nos permitirá realizar un conexión o enlace entre 2 elementos. 
+La librería [react-xarrows](https://www.npmjs.com/package/react-xarrows) nos permitirá realizar un conexión o enlace entre 2 elementos.
 
-En este proyecto se puede apreciar 2 listas, permitiendo al usuario hacer el match a cualquier elemento sin importar si las listas están ordenadas o no. 
+En este proyecto se puede apreciar 2 listas, permitiendo al usuario hacer el match a cualquier elemento sin importar si las listas están ordenadas o no.
 
-No importa el escenario en que el usuario realice el match, siempre va tener los resultados deseados. 
+No importa el escenario en que el usuario realice el match, siempre va tener los resultados deseados.
 
-Para poder realizar esta conexión entre 2 elementos, la librería trabaja con 2 parámetros. 
+Para poder realizar esta conexión entre 2 elementos, la librería trabaja con 2 parámetros.
+
 1. El elemento A debe ser una referencia (`useRef()`)
-2. El elemento B debe ser identificado por su id (string) 
+2. El elemento B debe ser identificado por su id (string)
+
 ```html
-<div id='destiny'></div>
+<div id="destiny"></div>
 ```
 
-Para trabajar con listas, se crea una lista de **referencias** según el tamaño de la lista. Y se asigna cada referencia a cada elemento de la lista A. Del mismo modo los elementos de la lista B deben ser identificados por su ID. Una buena idea es usar el **id de cada objeto de la lista** o el index. 
+Para trabajar con listas, se crea una lista de **referencias** según el tamaño de la lista. Y se asigna cada referencia a cada elemento de la lista A. Del mismo modo los elementos de la lista B deben ser identificados por su ID. Una buena idea es usar el **id de cada objeto de la lista** o el index.
 
 Ejemplo lista B
-```html
-<div id='1'></div>
-<div id=`item-${1}`></div>
-```
 
+```html
+<div id="1"></div>
+<div id="`item-${1}`"></div>
+```
 
 ## Restricciones 🔒
 
@@ -49,6 +54,7 @@ const myList = {
 ```
 
 ## Tecnologías usadas 💡
+
 ✅ ReactJS
 
 ✅ ViteJS
@@ -58,7 +64,6 @@ const myList = {
 ✅ TailwindCSS
 
 ✅ react-xarrows
-
 
 ## Instalación 💽
 
