@@ -85,6 +85,7 @@ export const MatchColumns = <LeftItemType, RightItemType>({
     setSelectedDescription(newSelectedDescription);
   };
 
+  // Efecto para la creacion de una nueva conexion cuando se haya seleccionado un item y una descripción
   useEffect(() => {
     if (selectedItem && selectedDescription) {
       const newConnection: IConnection = {
@@ -98,6 +99,7 @@ export const MatchColumns = <LeftItemType, RightItemType>({
     }
   }, [selectedItem, selectedDescription]);
 
+  // Efecto para remover las conexiones relacionadas con la nueva conexion
   useEffect(() => {
     if (connection) {
       setConnections((prevConnections) => {
@@ -112,6 +114,19 @@ export const MatchColumns = <LeftItemType, RightItemType>({
     }
   }, [connection]);
 
+  // Efecto pra asesgurarse de que todas las conexiones tengan un color
+  useEffect(() => {
+    const connection = connections.find((connection) => !connection.color);
+    if (connection) {
+      const index = connections.indexOf(connection);
+      const newConnections = [...connections];
+      newConnections[index].color = getRandomColor();
+      setConnections(newConnections);
+    }
+  }, [connections]);
+
+  // Efecto para devolver las conexiones creadas al componente padre, devolvemos un array de objetos
+  // con el formato { start: LeftItemType, end: RightItemType }
   useEffect(() => {
     if (onConnectionsChange) {
       const newConnections: {
@@ -124,16 +139,6 @@ export const MatchColumns = <LeftItemType, RightItemType>({
       onConnectionsChange(newConnections);
     }
   }, [connections, onConnectionsChange, descriptionList, itemList]);
-
-  useEffect(() => {
-    const connection = connections.find((connection) => !connection.color);
-    if (connection) {
-      const index = connections.indexOf(connection);
-      const newConnections = [...connections];
-      newConnections[index].color = getRandomColor();
-      setConnections(newConnections);
-    }
-  }, [connections]);
 
   return (
     <div
