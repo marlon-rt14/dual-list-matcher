@@ -55,8 +55,8 @@ export const MatchColumns = <LeftItemType, RightItemType>({
   onConnectionsChange,
   xarrowProps,
 }: IProps<LeftItemType, RightItemType>) => {
-  const { list: itemList, renderItem: renderLeftItem, title: leftTitle } = leftSide;
-  const { list: descriptionList, renderItem: renderRightItem, title: rightTitle } = rightSide;
+  const { list: itemList, renderItem: renderLeftItem, title: leftTitle = "Items" } = leftSide;
+  const { list: descriptionList, renderItem: renderRightItem, title: rightTitle = "Descriptions" } = rightSide;
 
   const [selectedItem, setSelectedItem] = useState<IItem | null>(null);
   const [selectedDescription, setSelectedDescription] = useState<IItem | null>(null);
@@ -124,6 +124,16 @@ export const MatchColumns = <LeftItemType, RightItemType>({
       onConnectionsChange(newConnections);
     }
   }, [connections, onConnectionsChange, descriptionList, itemList]);
+
+  useEffect(() => {
+    const connection = connections.find((connection) => !connection.color);
+    if (connection) {
+      const index = connections.indexOf(connection);
+      const newConnections = [...connections];
+      newConnections[index].color = getRandomColor();
+      setConnections(newConnections);
+    }
+  }, [connections]);
 
   return (
     <div
