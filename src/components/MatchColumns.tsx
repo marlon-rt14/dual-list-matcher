@@ -21,32 +21,32 @@ export interface IConnection {
   end: string | null; // campo que indica el FINAL de la conexion
   color: string | null; // campo que indica el COLOR de la conexion
 }
-interface ILeftList<LeftItemType> {
-  list: LeftItemType[];
-  renderItem: (item: LeftItemType, selectedItem?: LeftItemType) => React.ReactNode;
+interface IStart<StartType> {
+  list: StartType[];
+  renderItem: (item: StartType, selectedItem?: StartType) => React.ReactNode;
   title?: string;
 }
 
-interface IRightList<RightItemType> {
-  list: RightItemType[];
-  renderItem: (item: RightItemType, selectedDescription?: RightItemType) => React.ReactNode;
+interface IEnd<EndType> {
+  list: EndType[];
+  renderItem: (item: EndType, selectedDescription?: EndType) => React.ReactNode;
   title?: string;
 }
-interface IProps<LeftItemType, RightItemType> {
-  leftSide: ILeftList<LeftItemType>;
-  rightSide: IRightList<RightItemType>;
+interface IProps<StartType, EndType> {
+  start: IStart<StartType>;
+  end: IEnd<EndType>;
   showHeader?: boolean;
   titleProps?: React.HTMLAttributes<HTMLDivElement>;
   listProps?: React.HTMLAttributes<HTMLDivElement>;
   containerProps?: React.HTMLAttributes<HTMLDivElement>;
-  onConnectionsChange?: (connections: { start: LeftItemType; end: RightItemType }[]) => void;
+  onConnectionsChange?: (connections: { start: StartType; end: EndType }[]) => void;
   connections?: IConnection[];
   xarrowProps?: xarrowPropsType;
 }
 
-export const MatchColumns = <LeftItemType, RightItemType>({
-  leftSide,
-  rightSide,
+export const MatchColumns = <StartType, EndType>({
+  start,
+  end,
   titleProps,
   showHeader,
   containerProps,
@@ -54,9 +54,9 @@ export const MatchColumns = <LeftItemType, RightItemType>({
   connections: links = [],
   onConnectionsChange,
   xarrowProps,
-}: IProps<LeftItemType, RightItemType>) => {
-  const { list: itemList, renderItem: renderLeftItem, title: leftTitle = "Items" } = leftSide;
-  const { list: descriptionList, renderItem: renderRightItem, title: rightTitle = "Descriptions" } = rightSide;
+}: IProps<StartType, EndType>) => {
+  const { list: itemList, renderItem: renderLeftItem, title: leftTitle = "Items" } = start;
+  const { list: descriptionList, renderItem: renderRightItem, title: rightTitle = "Descriptions" } = end;
 
   const [selectedItem, setSelectedItem] = useState<IItem | null>(null);
   const [selectedDescription, setSelectedDescription] = useState<IItem | null>(null);
@@ -126,12 +126,12 @@ export const MatchColumns = <LeftItemType, RightItemType>({
   }, [connections]);
 
   // Efecto para devolver las conexiones creadas al componente padre, devolvemos un array de objetos
-  // con el formato { start: LeftItemType, end: RightItemType }
+  // con el formato { start: StartType, end: EndType }
   useEffect(() => {
     if (onConnectionsChange) {
       const newConnections: {
-        start: LeftItemType;
-        end: RightItemType;
+        start: StartType;
+        end: EndType;
       }[] = connections.map((connection) => ({
         start: itemList[connection.start],
         end: descriptionList.find((description) => hasMatchingEndId(connection, description)),

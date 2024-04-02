@@ -45,12 +45,12 @@ function App() {
     <div className="h-screen flex justify-center items-center">
       <MatchColumns
         showHeader
-        leftSide={{
+        start={{
           list: ANIMALS,
           renderItem: renderAnimalItem,
           title: "Animals",
         }}
-        rightSide={{
+        end={{
           list: DESCRIPTIONS,
           renderItem: renderDescriptionItem,
           title: "Descriptions",
